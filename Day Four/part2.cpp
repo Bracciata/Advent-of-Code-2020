@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <array>
+#include <vector> 
+#include <sstream>
 
 using namespace std;
 
@@ -46,8 +48,25 @@ int main()
             }
             else
             {
-                if (tp.find("byr:") != std::string::npos)
+                string code;
+                string value;
+                vector<string> array;
+                stringstream ss(tp);
+                string temp;
+                while (tp >> temp)
+                    array.push_back(temp);
+                for (int i = 0; i < array.size(); i++)
                 {
+
+                    std::replace(array[i].begin(), array[i].end(), ':', ' '); // replace ':' by ' '
+                    vector<string> arrayTwo;
+                    ss(array[i]);
+                    while (ss >> array[i])
+                        arrayTwo.push_back(array[i]);
+                }
+                if (code == "byr:")
+                {
+                    cout << "HERE" << endl;
                     requiredFields[0] = true;
                 }
                 if (tp.find("iyr:") != std::string::npos)

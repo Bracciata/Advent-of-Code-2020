@@ -6,15 +6,15 @@ using namespace std;
 int getTrees(int x, int y)
 {
     fstream inputFile;
-    inputFile.open("input.txt", ios::in); 
+    inputFile.open("input.txt", ios::in);
     int trees = 0;
     if (inputFile.is_open())
-    { 
+    {
         string tp;
         int lineNumber = 0;
         while (getline(inputFile, tp))
         {
-         
+
             if (lineNumber > 0 && lineNumber % y == 0)
             {
                 int spotToCheck = (x * lineNumber) % (tp.length() - 1);
@@ -26,7 +26,14 @@ int getTrees(int x, int y)
             }
             lineNumber++;
         }
-        inputFile.close(); 
+        int spotToCheck = ((x * (lineNumber - 1)) % (tp.length()));
+
+        if (tp[spotToCheck] == '#')
+        {
+            trees++;
+            cout << lineNumber << endl;
+        }
+        inputFile.close();
         cout << "Total Trees: " << trees << "\n";
     }
     return trees;

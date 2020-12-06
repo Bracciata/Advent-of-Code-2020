@@ -14,21 +14,26 @@ int main()
         int lineNumber = 0;
         int trees = 0;
         while (getline(inputFile, tp))
-        {
-            if (lineNumber > 0)
-            {
+{            if (lineNumber > 0)
+            {   
+
                 int spotToCheck = (3 * lineNumber) % (tp.length() - 1);
 
+                
                 if (tp[spotToCheck] == '#')
                 {
                     trees++;
-                    cout << lineNumber << endl;
-                    
                 }
-
             }
             lineNumber++;
         }
+        int spotToCheck = ((3 *(lineNumber-1)) % (tp.length()));
+
+        if (tp[spotToCheck] == '#')
+        {
+            trees++;
+        }
+
         inputFile.close();
         cout << "Total Trees: " << trees << "\n";
     }

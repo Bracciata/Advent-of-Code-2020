@@ -3,10 +3,10 @@
 #include <string>
 #include <array>
 #include <cmath>
+#include <algorithm>
+#include <vector>       // std::vector
 
 using namespace std;
-
-
 
 //https://www.programiz.com/cpp-programming/examples/binary-decimal-convert
 int convertBinaryToDecimal(long n)
@@ -25,11 +25,12 @@ int convertBinaryToDecimal(long n)
 // main() is where program execution begins.
 int main()
 {
+    int seatIDs[813];
+    int currentSeats = 0;
     int valid = 0;
     fstream inputFile;
     // Reading a file from https://www.tutorialspoint.com/read-data-from-a-text-file-using-cplusplus#:~:text=Read%20Data%20from%20a%20Text%20File%20using%20C%2B%2B,operation%20using%20object%20newfile.%204%20Example%205%20Output
     inputFile.open("input.txt", ios::in); //open a file to perform read operation using file object
-    int maxID = 0;
     if (inputFile.is_open())
     { //checking whether the file is open
         std::string tp;
@@ -68,12 +69,19 @@ int main()
                 pos += 1;
             }
             int col = convertBinaryToDecimal(std::stol(colStr));
-            if ((row * 8) + col > maxID)
+            seatIDs[currentSeats] = (row * 8) + col;
+            currentSeats++;
+        }
+        std::vector<int> vectorIDs (seatIDs, seatIDs+currentSeats);   
+        sort(vectorIDs.begin(), vectorIDs.end());
+        for (int i = 1; i < currentSeats; i++)
+        {
+            if (vectorIDs[i] == vectorIDs[i - 1] + 2)
             {
-                maxID = (row * 8) + col;
+                cout << "Your seat is: " << vectorIDs[i]- 1 << '\n';
+                return 0;
             }
         }
-        cout << "Max ID: " << maxID << '\n';
         return 0;
     }
 }

@@ -38,6 +38,9 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "vector": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "algorithm": "cpp",
+        "iterator": "cpp",
+        "sstream": "cpp"
     }
 }
